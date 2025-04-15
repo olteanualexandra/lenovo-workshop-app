@@ -12,9 +12,25 @@ import { RecipeCardComponent } from '../../components/recipe-card/recipe-card.co
 })
 export class HomeComponent {
     recipes: Recipe[] = [];
-
+    dummyRecipes!: Recipe[];
+    //errorMessage ='';
     constructor(recipesService: RecipesService){
       this.recipes= recipesService.recipes;
-
+     // try{
+      recipesService.getAllRecipes().subscribe({
+        next: (response) => {
+          console.log(response);
+          //throw new Error('Something happened');
+          this.dummyRecipes =response.recipes;
+        },
+       // error: (err) => {
+           // console.log(err);
+            //this.errorMessage=err.message;
+        //},
+      });
+    //}catch(error: any){
+      //this.errorMessage= error;
     }
-}
+
+  }
+//}
