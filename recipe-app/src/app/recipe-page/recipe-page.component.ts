@@ -1,3 +1,4 @@
+import { routes } from './../app.routes';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -5,10 +6,8 @@ import { ActivatedRoute } from '@angular/router';
   selector: 'app-recipe-page',
   imports: [],
   templateUrl: './recipe-page.component.html',
-  styleUrl: './recipe-page.component.scss'
+  styleUrl: './recipe-page.component.scss',
 })
 export class RecipePageComponent {
-
-  readonly router= inject(ActivatedRoute)
-
+  readonly router = inject(ActivatedRoute);
 }

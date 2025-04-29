@@ -1,36 +1,49 @@
 import { Component } from '@angular/core';
-
+import { RecipeCardComponent } from '../../components/recipe-card/recipe-card.component';
 import { Recipe } from '../../interfaces/recipe.interface';
 import { RecipesService } from '../../services/recipes.service';
-import { RecipeCardComponent } from '../../components/recipe-card/recipe-card.component';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [RecipeCardComponent],
+  imports: [RecipeCardComponent, FormsModule],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-    recipes: Recipe[] = [];
-    dummyRecipes!: Recipe[];
-    //errorMessage ='';
-    constructor(recipesService: RecipesService){
-      this.recipes= recipesService.recipes;
-     // try{
+  recipes: Recipe[] = [];
+  dummyRecipes!: Recipe[];
+  filteredRecipes!: Recipe[];
+  errorMessage: any = '';
+  searchValue = '';
+
+  constructor(recipesService: RecipesService, readonly router:Router) {
+    this.recipes = recipesService.recipes;
+    try {
       recipesService.getAllRecipes().subscribe({
         next: (response) => {
           console.log(response);
-          //throw new Error('Something happened');
-          this.dummyRecipes =response.recipes;
+          this.dummyRecipes = response.recipes;
+          this.filteredRecipes = response.recipes;
         },
-       // error: (err) => {
-           // console.log(err);
-            //this.errorMessage=err.message;
-        //},
+        error: (err) => {
+          console.log(err);
+          this.errorMessage = err.message;
+        },
       });
-    //}catch(error: any){
-      //this.errorMessage= error;
+    } catch (error) {
+      this.errorMessage = error;
     }
-
   }
-//}
+
+  redirectionToAddRecipe(){
+    this.router.navigateByUrl('add-recipe');
+  }
+
+  filterValues() {
+    this.filteredRecipes = this.dummyRecipes.filter((recipe) =>
+      recipe.name.toUpperCase().includes(this.searchValue.toUpperCase())
+    );
+  }
+}

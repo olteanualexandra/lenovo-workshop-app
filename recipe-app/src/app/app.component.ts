@@ -8,11 +8,9 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'recipe-app';
+  title: string = 'recipe-app';
 
-  showMessage(){
+  showMessage() {
     console.log('Hello world')
   }
-  
 }
-

@@ -7,18 +7,15 @@ import { CommonModule } from '@angular/common';
   selector: 'app-recipe-card',
   imports: [CommonModule],
   templateUrl: './recipe-card.component.html',
-  styleUrl: './recipe-card.component.scss'
+  styleUrl: './recipe-card.component.scss',
 })
 export class RecipeCardComponent {
-    @Input() recipe!: Recipe;
+  @Input() recipe!: Recipe;
 
-    constructor(readonly router: Router){
+  constructor(readonly router: Router) {}
 
-    }
-
-    goToRecipePage(){
-      //console.log(this.recipe);
-      this.router.navigateByUrl('recipes/' + this.recipe.id);
-    }
-
+  goToRecipePage() {
+    // console.log(this.recipe);
+    this.router.navigateByUrl('recipes/' + this.recipe.id);
   }
+}

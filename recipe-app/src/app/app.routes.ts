@@ -5,8 +5,9 @@ import { AddRecipeComponent } from './add-recipe/add-recipe.component';
 import { Page404Component } from './page404/page404.component';
 
 export const routes: Routes = [
-    {path: '', redirectTo: 'recipes', pathMatch: 'full'},
-    {path: 'recipes', component: HomeComponent}, 
-    {path:'recipes/:id', component: RecipePageComponent}, 
-    {path: 'add-recipe', component: AddRecipeComponent}, 
-    {path: '**', component: Page404Component}]; // path-ul cu ** inseamna ca oricare alt path introdus e fallback page- arata er 404
+  { path: '', redirectTo: 'recipes', pathMatch: 'full' },
+  { path: 'recipes', component: HomeComponent },
+  { path: 'recipes/:id', component: RecipePageComponent },
+  { path: 'add-recipe', component: AddRecipeComponent },
+  { path: '**', component: Page404Component },
+];
