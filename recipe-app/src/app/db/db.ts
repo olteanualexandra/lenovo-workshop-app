@@ -18,4 +18,3 @@ const schema = i.schema({
 const db = init({ appId: APP_ID, schema });
 
 export {db,schema};
-

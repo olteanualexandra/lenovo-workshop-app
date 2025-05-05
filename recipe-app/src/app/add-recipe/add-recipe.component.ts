@@ -50,7 +50,11 @@ export class AddRecipeComponent {
   //   this.localStorageValue= localStorage.getItem('theme');
   // }
   if(this.addRecipeForm.valid){
+    console.log('Form Data:', this.addRecipeForm.value); 
     this.recipeService.addDbRecipes(this.addRecipeForm.value as Omit<Recipe, 'id'>);
+    alert('Recipe added successfully!'); 
+  } else {
+    console.error('Form is invalid'); 
   }
-}
+  }
 }

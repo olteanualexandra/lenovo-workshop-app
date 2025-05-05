@@ -1,13 +1,19 @@
+
 <div
   class="card-container"
   [ngStyle]="{
-    backgroundColor: recipe.prepTimeMinutes >= 20 ? 'red' : 'green',
+    backgroundColor: recipe.prepTimeMinutes >= 20 ? '#253639' : '#39513f'
   }"
   [ngClass]="{ colorWhite: recipe.difficulty === 'Easy' }"
 >
-  <div>{{ recipe.name | uppercase }}</div>
-  <img [src]="recipe.image" alt="recipe-image" />
-  <div><b>Preparation Time: </b> {{ recipe.prepTimeMinutes }}</div>
-  <div>Difficulty: {{ recipe.difficulty }}</div>
-  <button (click)="goToRecipePage()">Tell me more</button>
+  <h3 class="recipe-title">{{ recipe.name | uppercase }}</h3>
+
+  <img [src]="recipe.image" alt="recipe-image" class="recipe-image" />
+
+  <p class="prep-time">
+    <strong>Preparation Time:</strong> {{ recipe.prepTimeMinutes }} minutes
+  </p>
+  <p class="difficulty">Difficulty: {{ recipe.difficulty }}</p>
+
+  <button class="card-button" (click)="goToRecipePage()">Tell me more</button>
 </div>

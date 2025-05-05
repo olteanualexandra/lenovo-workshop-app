@@ -1,19 +1,58 @@
+
+
+$main-bg: #bebebe;
+$primary: #c8d7d5;
+$accent: #c8d7d5;
+
 .card-container {
-  background-color: beige;
+
   width: 390px;
   height: 450px;
+  background-color: $main-bg;
+  color: $primary;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
+  padding: 1.2rem;
+  transition: transform 0.3s ease;
 
-  img {
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+
+  .recipe-image {
     width: 180px;
     height: 180px;
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .prep-time,
+  .difficulty {
+    margin: 0.3rem 0;
+    font-size: 0.95rem;
+  }
+
+  .card-button {
+    padding: 0.6rem 1.2rem;
+    background-color: rgb(100, 125, 105);
+    color: $accent;
+    border: 2px solid $accent;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: $accent;
+      color: white;
+    }
   }
 }
-
 .colorWhite {
-  color: white;
+  color: white !important;
 }
-// .card-container > img
