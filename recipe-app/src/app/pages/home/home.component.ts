@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RecipeCardComponent } from '../../components/recipe-card/recipe-card.component';
 import { Recipe } from '../../interfaces/recipe.interface';
 import { RecipesService } from '../../services/recipes.service';
@@ -12,17 +12,25 @@ import { db } from '../../db/db';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   recipes: Recipe[] = [];
   dummyRecipes!: Recipe[];
   filteredRecipes!: Recipe[];
   errorMessage: any = '';
   searchValue = '';
   dbRecipes!: any[];
-  constructor(recipesService: RecipesService, readonly router:Router) {
-    this.recipes = recipesService.recipes;
+  dbsubscription: any;
+
+  constructor(
+    private recipesService: RecipesService,
+    private router: Router
+  ) {}
+
+  ngOnInit() {
+    this.recipes = this.recipesService.recipes;
+
     try {
-      recipesService.getAllRecipes().subscribe({
+      this.recipesService.getAllRecipes().subscribe({
         next: (response) => {
           console.log(response);
           this.dummyRecipes = response.recipes;
@@ -36,24 +44,28 @@ export class HomeComponent {
     } catch (error) {
       this.errorMessage = error;
     }
-    db.subscribeQuery({recipes: {} }, (resp) =>{
-      if(resp.error)
+    
+   db.subscribeQuery({ recipes: {} }, (resp) => {
+      if (resp.error) {
         this.errorMessage = resp.error;
-  
-        if(resp.data){
-    this.dbRecipes=resp.data.recipes;
-  }}
-);
+      }
 
-}
-  redirectionToAddRecipe(){
-    this.router.navigateByUrl('add-recipe');
+      if (resp.data) {
+        this.dbRecipes = resp.data.recipes;
+      }
+    });
   }
 
+  redirectionToAddRecipe() {
+    this.router.navigateByUrl('add-recipe');
+  }
+ 
+ // ngOnDestroy() {
+   //this.dbsubscription();
+ // }
   filterValues() {
     this.filteredRecipes = this.dummyRecipes.filter((recipe) =>
       recipe.name.toUpperCase().includes(this.searchValue.toUpperCase())
     );
   }
-  }
-  
+}

@@ -2,10 +2,11 @@ import { Component, Input } from '@angular/core';
 import { Recipe } from '../../interfaces/recipe.interface';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-recipe-card',
-  imports: [CommonModule],
+  imports: [CommonModule,MatCardModule],
   templateUrl: './recipe-card.component.html',
   styleUrl: './recipe-card.component.scss',
 })

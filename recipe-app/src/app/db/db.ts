@@ -1,6 +1,7 @@
 import { init, i, id, InstaQLEntity } from "@instantdb/core";
+import { environment } from "../../environments/environment";
 // ID for app: angular
-const APP_ID = "88af97b0-c5fa-41da-a1a2-d2c9e323aa78";
+const APP_ID = environment.APP_ID;
 
 // Optional: Declare your schema!
 const schema = i.schema({
